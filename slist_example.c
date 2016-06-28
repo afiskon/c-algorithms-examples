@@ -15,6 +15,7 @@ void main()
 {
 	slist_iter iter;
 	ListItemData item1, item2, item3;
+	ListItem tmp;
 
 	slist_head head;
 	slist_init(&head);
@@ -23,13 +24,26 @@ void main()
 	strcpy(item2.data, "second item");
 	strcpy(item3.data, "third item");
 
+	printf("is empty before: %d\n", slist_is_empty(&head));
+
 	slist_push_head(&head, (slist_node*)&item1);
 	slist_push_head(&head, (slist_node*)&item2);
 	slist_push_head(&head, (slist_node*)&item3);
 
+	printf("is empty aftre: %d\n", slist_is_empty(&head));
+
 	slist_foreach(iter, &head)
 	{
-		ListItem item = (ListItem) iter.cur;
-		printf("item->data = %s\n", item->data);
+		tmp = (ListItem) iter.cur;
+		printf("tmp->data = %s\n", tmp->data);
+	}
+
+	tmp = (ListItem) slist_pop_head_node(&head);
+	printf("After slist_pop_head_node call tmp->data = %s\n", tmp->data);
+
+	slist_foreach(iter, &head)
+	{
+		tmp = (ListItem) iter.cur;
+		printf("tmp->data = %s\n", tmp->data);
 	}
 }
