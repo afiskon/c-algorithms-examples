@@ -34,6 +34,7 @@ void tree_freefunc(RBNode* node, void* arg)
 void main()
 {
 	RBTree tree;
+	bool isNew;
 	TreeItemData item1, item2, item3;
 
 	rb_create(&tree, sizeof(TreeItemData), tree_comparator, tree_combiner, tree_allocfunc, tree_freefunc, NULL);
@@ -43,11 +44,9 @@ void main()
 	strcpy(item3.data, "third item");
 
 	printf("is empty before: %d\n", rb_leftmost(&tree) == NULL);
-
-//	slist_push_head(&head, (slist_node*)&item1);
-//	slist_push_head(&head, (slist_node*)&item2);
-//	slist_push_head(&head, (slist_node*)&item3);
-
+	rb_insert(&tree, (RBNode*)&item1, &isNew);
+	rb_insert(&tree, (RBNode*)&item2, &isNew);
+	rb_insert(&tree, (RBNode*)&item3, &isNew);
 	printf("is empty after: %d\n", rb_leftmost(&tree) == NULL);
 
 /*
