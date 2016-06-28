@@ -30,7 +30,7 @@ void main()
 	dlist_push_head(&head, (dlist_node*) &item2);
 	dlist_push_head(&head, (dlist_node*) &item3);
 
-	printf("is empty aftre: %d\n", dlist_is_empty(&head));
+	printf("is empty after: %d\n", dlist_is_empty(&head));
 
 	dlist_foreach(iter, &head)
 	{

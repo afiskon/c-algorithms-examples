@@ -30,7 +30,7 @@ void main()
 	slist_push_head(&head, (slist_node*)&item2);
 	slist_push_head(&head, (slist_node*)&item3);
 
-	printf("is empty aftre: %d\n", slist_is_empty(&head));
+	printf("is empty after: %d\n", slist_is_empty(&head));
 
 	slist_foreach(iter, &head)
 	{
