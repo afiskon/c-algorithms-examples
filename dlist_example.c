@@ -26,9 +26,9 @@ void main()
 
 	printf("is empty before: %d\n", dlist_is_empty(&head));
 
-	dlist_push_head(&head, (dlist_node*) &item1);
-	dlist_push_head(&head, (dlist_node*) &item2);
-	dlist_push_head(&head, (dlist_node*) &item3);
+	dlist_push_tail(&head, (dlist_node*) &item1);
+	dlist_push_tail(&head, (dlist_node*) &item2);
+	dlist_push_tail(&head, (dlist_node*) &item3);
 
 	printf("is empty after: %d\n", dlist_is_empty(&head));
 
@@ -38,8 +38,8 @@ void main()
 		printf("tmp->data = %s\n", tmp->data);
 	}
 
-	tmp = (ListItem) dlist_pop_head_node(&head);
-	printf("After dlist_pop_head_node call tmp->data = %s\n", tmp->data);
+	tmp = (ListItem) dlist_pop_tail_node(&head);
+	printf("After dlist_pop_tail_node call tmp->data = %s\n", tmp->data);
 
 	dlist_foreach(iter, &head)
 	{
