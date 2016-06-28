@@ -36,6 +36,7 @@ void main()
 	RBTree tree;
 	bool isNew;
 	TreeItemData item1, item2, item3;
+	TreeItem tmp;
 
 	rb_create(&tree, sizeof(TreeItemData), tree_comparator, tree_combiner, tree_allocfunc, tree_freefunc, NULL);
 
@@ -49,20 +50,26 @@ void main()
 	rb_insert(&tree, (RBNode*)&item3, &isNew);
 	printf("is empty after: %d\n", rb_leftmost(&tree) == NULL);
 
-/*
-	slist_foreach(iter, &head)
+	rb_begin_iterate(&tree, LeftRightWalk);
+	while(tmp = (TreeItem)rb_iterate(&tree))
 	{
-		tmp = (ListItem) iter.cur;
 		printf("tmp->data = %s\n", tmp->data);
 	}
 
-	tmp = (ListItem) slist_pop_head_node(&head);
-	printf("After slist_pop_head_node call tmp->data = %s\n", tmp->data);
-
-	slist_foreach(iter, &head)
+	tmp = (TreeItem)rb_find(&tree, (RBNode*)&item2);
+	if(tmp)
 	{
-		tmp = (ListItem) iter.cur;
+		printf("item2 found, deleting\n");
+		rb_delete(&tree, (RBNode*)tmp);
+	}
+	else
+	{
+		printf("item2 not found! :(\n");
+	}
+
+	rb_begin_iterate(&tree, LeftRightWalk);
+	while(tmp = (TreeItem)rb_iterate(&tree))
+	{
 		printf("tmp->data = %s\n", tmp->data);
 	}
-*/
 }
