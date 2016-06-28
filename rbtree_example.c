@@ -35,19 +35,22 @@ void main()
 {
 	RBTree tree;
 	bool isNew;
-	TreeItemData item1, item2, item3;
+	TreeItemData item;
 	TreeItem tmp;
 
 	rb_create(&tree, sizeof(TreeItemData), tree_comparator, tree_combiner, tree_allocfunc, tree_freefunc, NULL);
 
-	strcpy(item1.data, "first item");
-	strcpy(item2.data, "second item");
-	strcpy(item3.data, "third item");
-
 	printf("is empty before: %d\n", rb_leftmost(&tree) == NULL);
-	rb_insert(&tree, (RBNode*)&item1, &isNew);
-	rb_insert(&tree, (RBNode*)&item2, &isNew);
-	rb_insert(&tree, (RBNode*)&item3, &isNew);
+
+	strcpy(item.data, "first item");
+	rb_insert(&tree, (RBNode*)&item, &isNew);
+
+	strcpy(item.data, "second item");
+	rb_insert(&tree, (RBNode*)&item, &isNew);
+
+	strcpy(item.data, "third item");
+	rb_insert(&tree, (RBNode*)&item, &isNew);
+
 	printf("is empty after: %d\n", rb_leftmost(&tree) == NULL);
 
 	rb_begin_iterate(&tree, LeftRightWalk);
@@ -56,15 +59,16 @@ void main()
 		printf("tmp->data = %s\n", tmp->data);
 	}
 
-	tmp = (TreeItem)rb_find(&tree, (RBNode*)&item2);
+	strcpy(item.data, "second item");
+	tmp = (TreeItem)rb_find(&tree, (RBNode*)&item);
 	if(tmp)
 	{
-		printf("item2 found, deleting\n");
+		printf("second item found, deleting\n");
 		rb_delete(&tree, (RBNode*)tmp);
 	}
 	else
 	{
-		printf("item2 not found! :(\n");
+		printf("second item not found! :(\n");
 	}
 
 	rb_begin_iterate(&tree, LeftRightWalk);
