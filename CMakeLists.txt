@@ -9,3 +9,6 @@ target_link_libraries(slist_example CAlgorithms)
 
 add_executable(dlist_example dlist_example.c)
 target_link_libraries(dlist_example CAlgorithms)
+
+add_executable(rbtree_example rbtree_example.c)
+target_link_libraries(rbtree_example CAlgorithms)
