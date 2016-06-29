@@ -11,22 +11,26 @@ typedef struct
 
 typedef TreeItemData *TreeItem;
 
-int tree_comparator(const RBNode* a, const RBNode* b, void* arg)
+static int
+tree_comparator(const RBNode* a, const RBNode* b, void* arg)
 {
 	return strcmp(((const TreeItem)a)->data, ((const TreeItem)b)->data);
 }
 
-void tree_combiner(RBNode* existing, const RBNode* newdata, void* arg)
+static void
+tree_combiner(RBNode* existing, const RBNode* newdata, void* arg)
 {
 	/* do nothing */
 }
 
-RBNode* tree_allocfunc(void* arg)
+static RBNode*
+tree_allocfunc(void* arg)
 {
 	return malloc(sizeof(TreeItemData));
 }
 
-void tree_freefunc(RBNode* node, void* arg)
+static void
+tree_freefunc(RBNode* node, void* arg)
 {
 	free(node);
 }
