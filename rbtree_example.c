@@ -75,9 +75,14 @@ void main()
 		printf("second item not found! :(\n");
 	}
 
-	rb_begin_iterate(&tree, LeftRightWalk);
-	while(tmp = (TreeItem)rb_iterate(&tree))
+	printf("is empty before: %d\n", rb_leftmost(&tree) == NULL);
+
+	/* rb_begin_iterate + rb_iterate doesn't work here! */
+	while(tmp = (TreeItem)rb_leftmost(&tree))
 	{
 		printf("tmp->data = %s\n", tmp->data);
+		rb_delete(&tree, (RBNode*)tmp);
 	}
+
+	printf("is empty after: %d\n", rb_leftmost(&tree) == NULL);
 }
