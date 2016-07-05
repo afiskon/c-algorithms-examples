@@ -322,9 +322,15 @@ int main()
 	srand(tv.tv_sec ^ tv.tv_usec);
 
 	general_test();
+
+	/* for(;;) { */
+
 	left_right_walk_test();
 	right_left_walk_test();
 	direct_walk_test();
 	inverted_walk_test();
+
+	/* } */
+
 	return 0;
 }
