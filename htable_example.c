@@ -44,21 +44,10 @@ void before_node_free_func(HTableNode node, void *arg)
 	/* do nothing */
 }
 
-int main()
+void
+run_test(HTable htable)
 {
 	int i, j;
-	HTableData htable;
-
-	htable_create(
-			&htable,
-			sizeof(ExpressionTableNodeData),
-			hash_func,
-			keyeq_func,
-			alloc_func,
-			free_func,
-			before_node_free_func,
-			NULL
-		);
 
 	/* fill table */
 	for(i = 1; i <= N; i++)
@@ -69,13 +58,12 @@ int main()
 			ExpressionTableNodeData new_node_data;
 			sprintf(new_node_data.expression, "%d + %d", i, j);
 			new_node_data.value = (i + j);
-			htable_put(&htable, (HTableNode)&new_node_data, &isNewNode);
+			htable_put(htable, (HTableNode)&new_node_data, &isNewNode);
 			assert(isNewNode);
 		}
 	}
 
-	printf("Total number of items: %u\n", (int)htable_nitems(&htable));
-	assert(htable_nitems(&htable) == (N*N));
+	assert(htable_nitems(htable) == (N*N));
 
 	/* check hash table is filled right */
 	for(i = 1; i <= N; i++)
@@ -85,13 +73,35 @@ int main()
 			ExpressionTableNode found_node;
 			ExpressionTableNodeData query;
 			sprintf(query.expression, "%d + %d", i, j);
-			found_node = (ExpressionTableNode)htable_get(&htable, (HTableNode)&query);
+			found_node = (ExpressionTableNode)htable_get(htable, (HTableNode)&query);
 			assert(found_node != NULL);
 			assert(found_node->value == (i + j));
 		}
 	}
 
 	/* TODO: clean table */
+
+
+}
+
+int main()
+{
+	// int i;
+	HTableData htable_data;
+
+	htable_create(
+			&htable_data,
+			sizeof(ExpressionTableNodeData),
+			hash_func,
+			keyeq_func,
+			alloc_func,
+			free_func,
+			before_node_free_func,
+			NULL
+		);
+
+	// for(i = 0; i < 1000; i++)
+		run_test(&htable_data);
 
 	printf("OK!\n");
 
