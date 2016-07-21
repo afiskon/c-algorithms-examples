@@ -5,11 +5,11 @@
 #include <unistd.h>
 #include "deps/algorithms/include/htable.h"
 
-#define N 1
+#define N 100
 
 typedef struct
 {
-	HTableNode node;
+	HTableNodeData node;
 	char expression[128];
 	int value;
 } ExpressionTableNodeData;
@@ -85,7 +85,6 @@ int main()
 			ExpressionTableNode found_node;
 			ExpressionTableNodeData query;
 			sprintf(query.expression, "%d + %d", i, j);
-			printf("%s\n", query.expression);
 			found_node = (ExpressionTableNode)htable_get(&htable, (HTableNode)&query);
 			assert(found_node != NULL);
 			assert(found_node->value == (i + j));
