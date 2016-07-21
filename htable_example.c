@@ -72,5 +72,7 @@ int main()
 		}
 	}
 
+	/* check hash table is filled right */
+
 	return 0;
 }
