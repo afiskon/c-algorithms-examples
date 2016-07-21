@@ -79,14 +79,34 @@ run_test(HTable htable)
 		}
 	}
 
-	/* TODO: clean table */
+	/* try to delete a non-existing node */
+	{
+		bool result;
+		ExpressionTableNodeData query;
+		sprintf(query.expression, "ololo trololo");
+		result = htable_delete(htable, (HTableNode)&query);
+		assert(result == false);
+	}
 
+	/* clean table */
+	for(i = 1; i <= N; i++)
+	{
+		for(j = 1; j <= N; j++)
+		{
+			bool result;
+			ExpressionTableNodeData query;
+			sprintf(query.expression, "%d + %d", i, j);
+			result = htable_delete(htable, (HTableNode)&query);
+			assert(result == true);
+		}
+	}
 
+	assert(htable_nitems(htable) == 0);
 }
 
 int main()
 {
-	// int i;
+	int i;
 	HTableData htable_data;
 
 	htable_create(
@@ -100,7 +120,7 @@ int main()
 			NULL
 		);
 
-	// for(i = 0; i < 1000; i++)
+	for(i = 0; i < 100; i++)
 		run_test(&htable_data);
 
 	printf("OK!\n");
