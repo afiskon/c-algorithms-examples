@@ -4,7 +4,7 @@ project(c-algorithms-examples)
 
 add_subdirectory(deps/algorithms)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
 
 add_executable(slist_example slist_example.c)
 target_link_libraries(slist_example CAlgorithms)

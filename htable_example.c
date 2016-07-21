@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include "deps/algorithms/include/htable.h"
 
+#define N 1
+
 typedef struct
 {
 	HTableNode node;
@@ -59,25 +61,38 @@ int main()
 		);
 
 	/* fill table */
-	for(i = 1; i <= 100; i++)
+	for(i = 1; i <= N; i++)
 	{
-		for(j = 1; j <= 100; j++)
+		for(j = 1; j <= N; j++)
 		{
 			bool isNewNode;
 			ExpressionTableNodeData new_node_data;
 			sprintf(new_node_data.expression, "%d + %d", i, j);
-			new_node_data.value = i + j;
+			new_node_data.value = (i + j);
 			htable_put(&htable, (HTableNode)&new_node_data, &isNewNode);
 			assert(isNewNode);
 		}
 	}
 
 	printf("Total number of items: %u\n", (int)htable_nitems(&htable));
-	assert(htable_nitems(&htable) == 100*100);
+	assert(htable_nitems(&htable) == (N*N));
 
 	/* check hash table is filled right */
+	for(i = 1; i <= N; i++)
+	{
+		for(j = 1; j <= N; j++)
+		{
+			ExpressionTableNode found_node;
+			ExpressionTableNodeData query;
+			sprintf(query.expression, "%d + %d", i, j);
+			printf("%s\n", query.expression);
+			found_node = (ExpressionTableNode)htable_get(&htable, (HTableNode)&query);
+			assert(found_node != NULL);
+			assert(found_node->value == (i + j));
+		}
+	}
 
-	// TODO
+	/* TODO: clean table */
 
 	printf("OK!\n");
 
