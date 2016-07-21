@@ -72,7 +72,11 @@ int main()
 		}
 	}
 
+//	printf("Total number of items: %d\n", htable_nitems(&
+
 	/* check hash table is filled right */
+
+// TODO
 
 	return 0;
 }
