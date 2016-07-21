@@ -9,21 +9,21 @@
 
 typedef struct
 {
-	HTableNodeData node;
+	HTableNode node;
 	char expression[128];
 	int value;
 } ExpressionTableNodeData;
 
 typedef ExpressionTableNodeData *ExpressionTableNode;
 
-bool keyeq_func(const HTableNode a_, const HTableNode b_, void *arg)
+bool keyeq_func(const HTableNode* a_, const HTableNode* b_, void *arg)
 {
 	ExpressionTableNode a = (ExpressionTableNode)a_;
 	ExpressionTableNode b = (ExpressionTableNode)b_;
 	return (strcmp(a->expression, b->expression) == 0);
 }
 
-uint32_t hash_func(const HTableNode a_, void *arg)
+uint32_t hash_func(const HTableNode* a_, void *arg)
 {
 	ExpressionTableNode a = (ExpressionTableNode)a_;
 	return htable_default_hash(a->expression, strlen(a->expression));
@@ -39,13 +39,13 @@ void free_func(void* mem, void *arg)
 	free(mem);
 }
 
-void before_node_free_func(HTableNode node, void *arg)
+void before_node_free_func(HTableNode* node, void *arg)
 {
 	/* do nothing */
 }
 
 void
-run_test(HTable htable)
+run_test(HTable* htable)
 {
 	int i, j;
 
@@ -58,7 +58,7 @@ run_test(HTable htable)
 			ExpressionTableNodeData new_node_data;
 			sprintf(new_node_data.expression, "%d + %d", i, j);
 			new_node_data.value = (i + j);
-			htable_put(htable, (HTableNode)&new_node_data, &isNewNode);
+			htable_put(htable, (HTableNode*)&new_node_data, &isNewNode);
 			assert(isNewNode);
 		}
 	}
@@ -73,7 +73,7 @@ run_test(HTable htable)
 			ExpressionTableNode found_node;
 			ExpressionTableNodeData query;
 			sprintf(query.expression, "%d + %d", i, j);
-			found_node = (ExpressionTableNode)htable_get(htable, (HTableNode)&query);
+			found_node = (ExpressionTableNode)htable_get(htable, (HTableNode*)&query);
 			assert(found_node != NULL);
 			assert(found_node->value == (i + j));
 		}
@@ -84,7 +84,7 @@ run_test(HTable htable)
 		bool result;
 		ExpressionTableNodeData query;
 		sprintf(query.expression, "ololo trololo");
-		result = htable_delete(htable, (HTableNode)&query);
+		result = htable_delete(htable, (HTableNode*)&query);
 		assert(result == false);
 	}
 
@@ -96,7 +96,7 @@ run_test(HTable htable)
 			bool result;
 			ExpressionTableNodeData query;
 			sprintf(query.expression, "%d + %d", i, j);
-			result = htable_delete(htable, (HTableNode)&query);
+			result = htable_delete(htable, (HTableNode*)&query);
 			assert(result == true);
 		}
 	}
@@ -107,7 +107,7 @@ run_test(HTable htable)
 int main()
 {
 	int i;
-	HTableData htable_data;
+	HTable htable_data;
 
 	htable_create(
 			&htable_data,
