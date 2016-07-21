@@ -72,11 +72,14 @@ int main()
 		}
 	}
 
-//	printf("Total number of items: %d\n", htable_nitems(&
+	printf("Total number of items: %u\n", (int)htable_nitems(&htable));
+	assert(htable_nitems(&htable) == 100*100);
 
 	/* check hash table is filled right */
 
-// TODO
+	// TODO
+
+	printf("OK!\n");
 
 	return 0;
 }
