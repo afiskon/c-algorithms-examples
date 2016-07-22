@@ -39,11 +39,6 @@ void free_func(void* mem, void *arg)
 	free(mem);
 }
 
-void before_node_free_func(HTableNode* node, void *arg)
-{
-	/* do nothing */
-}
-
 void
 run_test(HTable* htable)
 {
@@ -116,7 +111,7 @@ int main()
 			keyeq_func,
 			alloc_func,
 			free_func,
-			before_node_free_func,
+			NULL,
 			NULL
 		);
 
