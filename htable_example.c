@@ -53,7 +53,7 @@ run_test(HTable* htable)
 			ExpressionTableNodeData new_node_data;
 			sprintf(new_node_data.expression, "%d + %d", i, j);
 			new_node_data.value = (i + j);
-			htable_put(htable, (HTableNode*)&new_node_data, &isNewNode);
+			htable_insert(htable, (HTableNode*)&new_node_data, &isNewNode);
 			assert(isNewNode);
 		}
 	}
@@ -68,7 +68,7 @@ run_test(HTable* htable)
 			ExpressionTableNode found_node;
 			ExpressionTableNodeData query;
 			sprintf(query.expression, "%d + %d", i, j);
-			found_node = (ExpressionTableNode)htable_get(htable, (HTableNode*)&query);
+			found_node = (ExpressionTableNode)htable_find(htable, (HTableNode*)&query);
 			assert(found_node != NULL);
 			assert(found_node->value == (i + j));
 		}
