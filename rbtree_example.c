@@ -72,7 +72,7 @@ general_test()
 	printf("is empty after: %d\n", rb_leftmost(&tree) == NULL);
 
 	rb_begin_iterate(&tree, LeftRightWalk);
-	while(tmp = (TreeItem)rb_iterate(&tree))
+	while( (tmp = (TreeItem)rb_iterate(&tree)) )
 	{
 		printf("tmp->data = %s\n", tmp->data);
 	}
@@ -92,7 +92,7 @@ general_test()
 	printf("is empty before: %d\n", rb_leftmost(&tree) == NULL);
 
 	/* rb_begin_iterate + rb_iterate doesn't work here! */
-	while(tmp = (TreeItem)rb_leftmost(&tree))
+	while( (tmp = (TreeItem)rb_leftmost(&tree)) )
 	{
 		printf("tmp->data = %s\n", tmp->data);
 		rb_delete(&tree, (RBNode*)tmp);
@@ -145,9 +145,9 @@ left_right_walk_test()
 	}
 
 	/* rb_begin_iterate + rb_iterate doesn't work here! */
-	while(temp1 = (TreeItem)rb_leftmost(&tree1))
+	while( (temp1 = (TreeItem)rb_leftmost(&tree1)) )
 		rb_delete(&tree1, (RBNode*)temp1);
-	while(temp2 = (TreeItem)rb_leftmost(&tree2))
+	while( (temp2 = (TreeItem)rb_leftmost(&tree2)) )
 		rb_delete(&tree2, (RBNode*)temp2);
 
 	printf("\n=== LEFT RIGHT WALK TEST PASSED! ===\n\n");
@@ -198,9 +198,9 @@ right_left_walk_test()
 	}
 
 	/* rb_begin_iterate + rb_iterate doesn't work here! */
-	while(temp1 = (TreeItem)rb_leftmost(&tree1))
+	while( (temp1 = (TreeItem)rb_leftmost(&tree1)) )
 		rb_delete(&tree1, (RBNode*)temp1);
-	while(temp2 = (TreeItem)rb_leftmost(&tree2))
+	while( (temp2 = (TreeItem)rb_leftmost(&tree2)) )
 		rb_delete(&tree2, (RBNode*)temp2);
 
 	printf("\n=== RIGHT LEFT WALK TEST PASSED! ===\n\n");
@@ -252,9 +252,9 @@ direct_walk_test()
 	}
 
 	/* rb_begin_iterate + rb_iterate doesn't work here! */
-	while(temp1 = (TreeItem)rb_leftmost(&tree1))
+	while( (temp1 = (TreeItem)rb_leftmost(&tree1)) )
 		rb_delete(&tree1, (RBNode*)temp1);
-	while(temp2 = (TreeItem)rb_leftmost(&tree2))
+	while( (temp2 = (TreeItem)rb_leftmost(&tree2)) )
 		rb_delete(&tree2, (RBNode*)temp2);
 
 	printf("\n=== DIRECT WALK TEST PASSED! ===\n\n");
@@ -305,9 +305,9 @@ inverted_walk_test()
 	}
 
 	/* rb_begin_iterate + rb_iterate doesn't work here! */
-	while(temp1 = (TreeItem)rb_leftmost(&tree1))
+	while( (temp1 = (TreeItem)rb_leftmost(&tree1)) )
 		rb_delete(&tree1, (RBNode*)temp1);
-	while(temp2 = (TreeItem)rb_leftmost(&tree2))
+	while( (temp2 = (TreeItem)rb_leftmost(&tree2)) )
 		rb_delete(&tree2, (RBNode*)temp2);
 
 	printf("\n=== INVERTED WALK TEST PASSED! ===\n\n");

@@ -11,7 +11,7 @@ typedef struct
 
 typedef ListItemData *ListItem;
 
-void main()
+int main()
 {
 	dlist_iter iter;
 	ListItemData item1, item2, item3;
@@ -46,4 +46,6 @@ void main()
 		tmp = (ListItem) iter.cur;
 		printf("tmp->data = %s\n", tmp->data);
 	}
+
+	return 0;
 }
