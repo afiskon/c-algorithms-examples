@@ -18,4 +18,4 @@ cmake -G "MinGW Makefiles" ..
 mingw32-make -j4
 ```
 
-See also: https://github.com/afiskon/c-algorithms
+See also: https://github.com/afiskon/c-libs
